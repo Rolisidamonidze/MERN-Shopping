@@ -1,0 +1,20 @@
+{
+  "name": "proshop",
+  "version": "1.0.0",
+  "description": "MERN shopping app",
+  "main": "server.js",
+  "author": "Roland Sidamonidze <rolandsidamonidze@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "nodemon backend/server.js",
+    "client": "cd frontend && yarn start",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\""
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13",
+    "concurrently": "^6.2.2"
+  }
+}
