@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import axios from 'axios';
+import Spinner from 'react-bootstrap/Spinner';
 
 const ProductScreen = ({ match }) => {
   const [product, setProduct] = useState([]);
@@ -23,7 +24,11 @@ const ProductScreen = ({ match }) => {
       </Link>
       <Row>
         <Col md={6}>
-          <Image src={product.image} alt={product.name} fluid></Image>
+          {product.image ? (
+            <Image src={product.image} alt={product.name} fluid></Image>
+          ) : (
+            <Spinner animation="border" role="status"></Spinner>
+          )}
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">

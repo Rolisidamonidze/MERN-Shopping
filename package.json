@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "MERN shopping app",
   "main": "server.js",
+  "type": "module",
   "author": "Roland Sidamonidze <rolandsidamonidze@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -11,10 +12,11 @@
     "dev": "concurrently \"yarn run server\" \"yarn run client\""
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13",
-    "concurrently": "^6.2.2"
+    "concurrently": "^6.2.2",
+    "nodemon": "^2.0.13"
   }
 }
