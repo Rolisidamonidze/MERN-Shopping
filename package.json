@@ -9,11 +9,16 @@
   "scripts": {
     "server": "nodemon backend/server.js",
     "client": "cd frontend && yarn start",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\""
+    "dev": "concurrently \"yarn run server\" \"yarn run client\"",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^6.0.8"
   },
   "devDependencies": {
     "concurrently": "^6.2.2",
