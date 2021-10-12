@@ -1,24 +1,23 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
 import {
   Row,
   Col,
   ListGroup,
   Image,
-  From,
   Button,
   Card,
   ListGroupItem,
   Form,
-} from "react-bootstrap";
-import { addToCart, removeFromCart } from "../actions/cartActions";
+} from 'react-bootstrap';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = ({ match, location, history }) => {
   const dispatch = useDispatch();
   const productId = match.params.id;
-  const quantity = location.search ? Number(location.search.split("=")[1]) : 1;
+  const quantity = location.search ? Number(location.search.split('=')[1]) : 1;
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 

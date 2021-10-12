@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Image,
-  ListGroup,
-  Button,
-  ListGroupItem,
-  Form,
-} from "react-bootstrap";
-import Rating from "../components/Rating";
-import { listProductDetails } from "../actions/productActions";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Row, Col, Image, ListGroup, Button, Form } from 'react-bootstrap';
+import Rating from '../components/Rating';
+import { listProductDetails } from '../actions/productActions';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const ProductScreen = ({ history, match }) => {
   const [quantity, setQuantity] = useState(1);
@@ -51,15 +43,10 @@ const ProductScreen = ({ history, match }) => {
                 <h3>{product.name}</h3>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Rating
-                  value={product.rating}
-                  text={`${product.numReviews} reviews`}
-                />
+                <Rating value={product.rating} text={`${product.numReviews} reviews`} />
               </ListGroup.Item>
               <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-              <ListGroup.Item>
-                Description: {product.description}
-              </ListGroup.Item>
+              <ListGroup.Item>Description: {product.description}</ListGroup.Item>
             </ListGroup>
           </Col>
           <Col md={3}>
@@ -76,9 +63,7 @@ const ProductScreen = ({ history, match }) => {
                 <Row>
                   <Col>Status:</Col>
                   <strong>
-                    <Col>
-                      {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
-                    </Col>
+                    <Col>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</Col>
                   </strong>
                 </Row>
               </ListGroup.Item>
