@@ -23,3 +23,7 @@ h3 {
 a {
   text-decoration: none;
 }
+
+label {
+  margin: 10px 0;
+}

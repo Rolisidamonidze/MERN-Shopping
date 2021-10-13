@@ -7,7 +7,7 @@
   "author": "Roland Sidamonidze <rolandsidamonidze@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon backend/server.js",
+    "server": "nodemon --inspect backend/server.js",
     "client": "cd frontend && yarn start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "data:import": "node backend/seeder",
