@@ -3,7 +3,7 @@ import { Form, Button, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getUserDetails } from '../actions/userActions';
+import { getUserProfile } from '../actions/userActions';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -24,16 +24,14 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push('/login');
     } else {
-      console.log(user, 'user');
-      if (!user) {
-        dispatch(getUserDetails('profile'));
+      if (!user || !user.name) {
+        dispatch(getUserProfile());
       } else {
         setName(user.name);
         setEmail(user.email);
-        dispatch(getUserDetails(user._id));
       }
     }
-  }, [dispatch, history, userInfo, user]);
+  }, [, history, userInfo, user]);
 
   const submitHandler = (e) => {
     e.preventDefault();
