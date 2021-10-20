@@ -9,36 +9,23 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstants';
 import axios from 'axios';
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_LOGIN_REQUEST,
-    });
-
-    const config = {
-      headers: {
-        ContentType: 'Application/json',
-      },
-    };
-
+    dispatch({ type: USER_LOGIN_REQUEST });
+    const config = { headers: { ContentType: 'Application/json'}};
     const { data } = await axios.post('/api/v1/users/login', { email, password }, config);
-
-    dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: data,
-    });
-
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
@@ -50,69 +37,51 @@ export const logout = () => async (dispatch) => {
 
 export const register = (name, email, password) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_REGISTER_REQUEST,
-    });
+    dispatch({ type: USER_REGISTER_REQUEST });
 
-    const config = {
-      headers: {
-        ContentType: 'Application/json',
-      },
-    };
-
+    const config = { headers: { ContentType: 'Application/json'}};
     const { data } = await axios.post('/api/v1/users', { name, email, password }, config);
-    dispatch({
-      type: USER_REGISTER_SUCCESS,
-      payload: data,
-    });
 
-    dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: data,
-    });
+    dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
 
 export const getUserProfile = () => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: USER_DETAILS_REQUEST,
-    });
+    dispatch({ type: USER_DETAILS_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
+    const { userLogin: { userInfo }} = getState();
+    const config = { headers: { authorization: `Bearer ${userInfo.token}` }};
     const { data } = await axios.get(`/api/v1/users/profile`, config);
 
-    dispatch({
-      type: USER_DETAILS_SUCCESS,
-      payload: data,
-    });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
+    const message = error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    dispatch({
-      type: USER_DETAILS_FAIL,
-      payload: message,
-    });
+    dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  }
+};
+
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
+    const { userLogin: { userInfo }} = getState();
+    const config = { headers: { authorization: `Bearer ${userInfo.token}` }};
+    const { data } = await axios.put(`/api/v1/users/profile`, user, config);
+    dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
+  } catch (error) {
+    const message = error.response && error.response.data.message 
+      ? error.response.data.message 
+      : error.message;
+    dispatch({ type: USER_UPDATE_PROFILE_FAIL, payload: message });
   }
 };

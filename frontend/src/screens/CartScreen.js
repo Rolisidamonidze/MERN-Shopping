@@ -31,16 +31,17 @@ const CartScreen = ({ match, location, history }) => {
     dispatch(removeFromCart(id));
   };
 
-  const checkoutHandler = () => {};
+  const checkoutHandler = (e) => {
+    e.preventDefault();
+    history.push('/shipping')
+  };
 
   return (
     <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
-          <Message>
-            Your card is empty <Link to='/'>Go Back</Link>
-          </Message>
+          <Message> Your card is empty <Link to='/'>Go Back</Link></Message>
         ) : (
           <ListGroup variant='flush'>
             {cartItems.map((item) => (
@@ -61,9 +62,7 @@ const CartScreen = ({ match, location, history }) => {
                         dispatch(addToCart(item.product, Number(e.target.value)))
                       }>
                       {[...Array(item.countInStock).keys()].map((n) => (
-                        <option key={n + 1} value={n + 1}>
-                          {n + 1}
-                        </option>
+                        <option key={n + 1} value={n + 1}> {n + 1} </option>
                       ))}
                     </Form.Control>
                   </Col>
@@ -85,13 +84,8 @@ const CartScreen = ({ match, location, history }) => {
         <Card>
           <ListGroup variant='flush'>
             <ListGroup.Item>
-              <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.quantity, 0)}) items
-              </h2>
-              $
-              {cartItems
-                .reduce((acc, item) => acc + item.quantity * item.price, 0)
-                .toFixed(2)}
+              <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.quantity, 0)}) items</h2>
+              ${cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
               <Button
