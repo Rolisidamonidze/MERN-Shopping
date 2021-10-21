@@ -27,3 +27,13 @@ a {
 label {
   margin: 10px 0;
 }
+
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+.form-check > input{
+  margin: 0 10px 2px 0;
+  min-height: auto;
+}
