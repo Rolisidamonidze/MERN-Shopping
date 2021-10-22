@@ -19,7 +19,7 @@ const PaymentScreen = ({ history }) => {
   const submitHandler = e => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
-    history.push("/placeorder")
+    history.push("/placeorder");
   };
 
   return (
@@ -45,7 +45,6 @@ const PaymentScreen = ({ history }) => {
                     id='Payoneer' 
                     name="PaymentMethod" 
                     value="Payoneer"
-                    checked
                     onChange={(e) => setPaymentMethod(e.target.value)}>
                 </Form.Check>
             </Col>
