@@ -11,7 +11,6 @@ const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
-  console.log(cartItems,'cartItems')
 
   //calculate price
   cart.itemsPrice = (Number(cart.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0))).toFixed(2);
